@@ -1,4 +1,4 @@
-package com.ajotcole.closecirclenewsletter.dto;
+package com.ajotcole.closecirclenewsletter.types;
 
 public class Book {
     Integer id;

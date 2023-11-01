@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.ajotcole.closecirclenewsletter.dto.Author;
-import com.ajotcole.closecirclenewsletter.dto.Book;
+import com.ajotcole.closecirclenewsletter.types.Author;
+import com.ajotcole.closecirclenewsletter.types.Book;
 
 @Component
 public class BookRepository {

@@ -1,4 +1,4 @@
-# Type definition
+# Book
 type Book {
   id: ID!
   title: String
@@ -6,18 +6,32 @@ type Book {
   author: Author
 }
 
-# Type definition
+# Author
 type Author {
   name: String
 }
 
-# Queries to retrive all books, and a book by id
+# Mail
+type Mail {
+  receipients: [MailReceipient!]!
+  subject: String
+  message: String
+}
+
+# Mail Receipient
+type MailReceipient {
+  name: String
+  email: String
+}
+
+# Queries
 type Query {
   allBooks: [Book]
   bookById(id: ID!): Book
 }
 
-# Query to update a book by id
+# Mutations
 type Mutation {
   updateBook(id: ID!, title: String): Book
+  sendMail(mail: Mail): Boolean
 }
