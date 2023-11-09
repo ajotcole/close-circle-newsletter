@@ -12,7 +12,8 @@ type Author {
 }
 
 # Mail
-type Mail {
+
+input Mail {
   receipients: [MailReceipient!]!
   subject: String
   message: String

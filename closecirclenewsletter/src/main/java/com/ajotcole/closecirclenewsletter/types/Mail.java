@@ -5,13 +5,13 @@ import java.util.List;
 public class Mail {
     String subject;
     String message;
-    List<MailReceipient> receipients;
+    List<MailReceipient> recipients;
 
-    public Mail(String subject, String message, List<MailReceipient> receipients) {
+    public Mail(String subject, String message, List<MailReceipient> recipients) {
         super();
         this.subject = subject;
         this.message = message;
-        this.receipients = receipients;
+        this.recipients = recipients;
     }
 
     public Mail() {
@@ -35,11 +35,11 @@ public class Mail {
         this.message = message;
     }
 
-    public List<MailReceipient> getReceipients() {
-        return receipients;
+    public List<MailReceipient> getRecipients() {
+        return recipients;
     }
 
-    public void setReceipients(List<MailReceipient> receipients) {
-        this.receipients = receipients;
+    public void setRecipients(List<MailReceipient> recipients) {
+        this.recipients = recipients;
     }
 }
