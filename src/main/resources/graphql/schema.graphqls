@@ -14,13 +14,13 @@ type Author {
 # Mail
 
 input Mail {
-  receipients: [MailReceipient!]!
+  recipients: [MailRecipient!]!
   subject: String
   message: String
 }
 
-# Mail Receipient
-type MailReceipient {
+# Mail Recipient
+input MailRecipient {
   name: String
   email: String
 }
