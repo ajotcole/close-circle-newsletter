@@ -15,7 +15,7 @@ CI definition will try to reflect that, and take work of my back.
 ### Todo List
 
 - [x] Add definition for Mail, MailRecipient and MailSendingMutation to GraphQL
-- [ ] Create basic working Integration Testing setup
+- [x] Create basic working Integration Testing setup
 - [ ] Create tests for MailSendingMutation
 - [ ] Connect to Strapi and retrieve Mail Templates (Authenticated Endpoint)
 - [ ] Correctly parse templates (Name values etc)
