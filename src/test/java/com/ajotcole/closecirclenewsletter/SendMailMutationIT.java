@@ -52,6 +52,35 @@ public class SendMailMutationIT {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void sendMailSuccessfully() throws Exception {
+        String query = "mutation SendMail {\n" +
+                "  sendMail(mail: {\n" +
+                "    recipients: [\n" +
+                "      {\n" +
+                "        name: \"testName\"\n" +
+                "        email: \"test@mail.com\"\n" +
+                "      }\n" +
+                "    ]\n" +
+                "    subject: \"testSubject\"\n" +
+                "    message: \"test message\"\n" +
+                "  }\n" +
+                "  )\n" +
+                "}";
+        JSONObject variables = new JSONObject();
+
+        MvcResult mvcResult = mockMvc.perform(post("/graphql")
+                        .content(generateRequest(query, variables))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(request().asyncStarted())
+                .andExpect(request().asyncResult(notNullValue()))
+                .andReturn();
+
+        mockMvc.perform(asyncDispatch(mvcResult))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
     private String generateRequest(String query, JSONObject variables) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("query", query);

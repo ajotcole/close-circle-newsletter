@@ -4,6 +4,8 @@ import com.ajotcole.closecirclenewsletter.types.Book;
 import com.ajotcole.closecirclenewsletter.types.Mail;
 import com.ajotcole.closecirclenewsletter.logic.SendMailMutation;
 import com.ajotcole.closecirclenewsletter.repository.BookRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -18,10 +20,15 @@ public class MainController {
 
     @Autowired
     private BookRepository bookRepository;
+    @Autowired
     private SendMailMutation sendMailMutation;
+
+    Logger logger = LoggerFactory.getLogger(MainController.class);
 
     @SchemaMapping(typeName = "Query", value = "allBooks")
     public List<Book> getAllBooks() {
+
+        logger.info("All books working now");
         return bookRepository.allBooks();
     }
 
@@ -37,6 +44,8 @@ public class MainController {
 
     @MutationMapping
     public Boolean sendMail(@Argument Mail mail) {
+        logger.info("Starting send mail mutation");
+
         return sendMailMutation.sendMail(mail);
     
     }
