@@ -1,9 +1,11 @@
 package com.ajotcole.closecirclenewsletter.controller;
 
+import com.ajotcole.closecirclenewsletter.logic.SignUpMutation;
 import com.ajotcole.closecirclenewsletter.types.Book;
 import com.ajotcole.closecirclenewsletter.types.Mail;
 import com.ajotcole.closecirclenewsletter.logic.SendMailMutation;
 import com.ajotcole.closecirclenewsletter.repository.BookRepository;
+import com.ajotcole.closecirclenewsletter.types.MutationResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ public class MainController {
     private BookRepository bookRepository;
     @Autowired
     private SendMailMutation sendMailMutation;
+    @Autowired
+    private SignUpMutation signUpMutation;
 
     Logger logger = LoggerFactory.getLogger(MainController.class);
 
@@ -48,6 +52,18 @@ public class MainController {
 
         return sendMailMutation.sendMail(mail);
     
+    }
+
+    @MutationMapping
+    public MutationResponse signUp(@Argument String mailAddress) {
+        logger.info("Starting mutation to sign up for newsletter");
+
+        // TODO create logic for mutation, also extend graphql definition
+
+        MutationResponse testResponse = new MutationResponse();
+
+        return testResponse;
+
     }
 
 }

@@ -14,6 +14,12 @@ public class SendMailMutation {
 
         logger.info(String.valueOf(mail));
 
+        // connect to strapi and retrieve template
+
+        // fill template variables with values
+
+        // send mail and add history row in db
+
         return true;
     }
 
