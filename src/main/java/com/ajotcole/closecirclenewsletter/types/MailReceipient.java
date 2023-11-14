@@ -2,14 +2,8 @@ package com.ajotcole.closecirclenewsletter.types;
 
 public class MailReceipient {
 
-    String name;
-    String email;
-
-    public MailReceipient(String name, String email) {
-        super();
-        this.name = name;
-        this.email = email;
-    }
+    private String name;
+    private String email;
 
     public MailReceipient() {
         super();
@@ -29,5 +23,23 @@ public class MailReceipient {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public static class Builder {
+        private final MailReceipient mailReceipient = new MailReceipient();
+
+        public Builder setName(String name) {
+            mailReceipient.name = name;
+            return this;
+        }
+
+        public Builder setEmail(String email) {
+            mailReceipient.email = email;
+            return this;
+        }
+
+        public MailReceipient build() {
+            return mailReceipient;
+        }
     }
 }

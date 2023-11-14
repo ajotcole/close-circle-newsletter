@@ -1,10 +1,12 @@
 package com.ajotcole.closecirclenewsletter.controller;
 
+import com.ajotcole.closecirclenewsletter.logic.ListMailRecipientsQuery;
 import com.ajotcole.closecirclenewsletter.logic.SignUpMutation;
 import com.ajotcole.closecirclenewsletter.types.Book;
 import com.ajotcole.closecirclenewsletter.types.Mail;
 import com.ajotcole.closecirclenewsletter.logic.SendMailMutation;
 import com.ajotcole.closecirclenewsletter.repository.BookRepository;
+import com.ajotcole.closecirclenewsletter.types.MailReceipient;
 import com.ajotcole.closecirclenewsletter.types.MutationResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +28,8 @@ public class MainController {
     private SendMailMutation sendMailMutation;
     @Autowired
     private SignUpMutation signUpMutation;
+    @Autowired
+    private  ListMailRecipientsQuery listMailRecipientsQuery;
 
     Logger logger = LoggerFactory.getLogger(MainController.class);
 
@@ -46,11 +50,18 @@ public class MainController {
         return bookRepository.updateBook(id, title);
     }
 
+    @QueryMapping
+    public List<MailReceipient> listMailRecipients() {
+        return listMailRecipientsQuery.getMailRecipients();
+    }
+
     @MutationMapping
-    public Boolean sendMail(@Argument Mail mail) {
+    public MutationResponse sendMail(@Argument Mail mail) {
         logger.info("Starting send mail mutation");
 
-        return sendMailMutation.sendMail(mail);
+        //return sendMailMutation.sendMail(mail);
+
+        return new MutationResponse();
     
     }
 
@@ -60,10 +71,7 @@ public class MainController {
 
         // TODO create logic for mutation, also extend graphql definition
 
-        MutationResponse testResponse = new MutationResponse();
-
-        return testResponse;
-
+        return new MutationResponse();
     }
 
 }

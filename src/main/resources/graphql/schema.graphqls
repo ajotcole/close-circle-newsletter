@@ -25,6 +25,11 @@ input MailRecipient {
   email: String
 }
 
+type MutationResponse {
+  statusCode: Int
+  message: String
+}
+
 # Queries
 type Query {
   allBooks: [Book]
@@ -34,5 +39,6 @@ type Query {
 # Mutations
 type Mutation {
   updateBook(id: ID!, title: String): Book
-  sendMail(mail: Mail): Boolean
+  sendMail(mail: Mail!): MutationResponse
+  signUp(mailRecipient: MailRecipient!): MutationResponse
 }
