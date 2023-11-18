@@ -1,4 +1,4 @@
-package com.ajotcole.closecirclenewsletter.types;
+package com.ajotcole.closecirclenewsletter.model;
 
 import java.util.List;
 

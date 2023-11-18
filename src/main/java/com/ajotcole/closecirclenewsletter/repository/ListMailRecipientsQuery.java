@@ -1,11 +1,13 @@
-package com.ajotcole.closecirclenewsletter.logic;
+package com.ajotcole.closecirclenewsletter.repository;
 
-import com.ajotcole.closecirclenewsletter.types.MailReceipient;
+import com.ajotcole.closecirclenewsletter.model.MailReceipient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class ListMailRecipientsQuery {
 
     Logger logger = LoggerFactory.getLogger(ListMailRecipientsQuery.class);

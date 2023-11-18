@@ -1,13 +1,13 @@
 package com.ajotcole.closecirclenewsletter.controller;
 
-import com.ajotcole.closecirclenewsletter.logic.ListMailRecipientsQuery;
-import com.ajotcole.closecirclenewsletter.logic.SignUpMutation;
-import com.ajotcole.closecirclenewsletter.types.Book;
-import com.ajotcole.closecirclenewsletter.types.Mail;
-import com.ajotcole.closecirclenewsletter.logic.SendMailMutation;
+import com.ajotcole.closecirclenewsletter.repository.ListMailRecipientsQuery;
+import com.ajotcole.closecirclenewsletter.repository.SignUpMutation;
+import com.ajotcole.closecirclenewsletter.model.Book;
+import com.ajotcole.closecirclenewsletter.model.Mail;
+import com.ajotcole.closecirclenewsletter.repository.SendMailMutation;
 import com.ajotcole.closecirclenewsletter.repository.BookRepository;
-import com.ajotcole.closecirclenewsletter.types.MailReceipient;
-import com.ajotcole.closecirclenewsletter.types.MutationResponse;
+import com.ajotcole.closecirclenewsletter.model.MailReceipient;
+import com.ajotcole.closecirclenewsletter.model.MutationResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,17 +61,17 @@ public class MainController {
 
         //return sendMailMutation.sendMail(mail);
 
-        return new MutationResponse();
+        return new MutationResponse.Builder().setMessage("Test").setStatusCode(200).build();
     
     }
 
     @MutationMapping
-    public MutationResponse signUp(@Argument String mailAddress) {
+    public MutationResponse signUp(@Argument String email, @Argument String name) {
         logger.info("Starting mutation to sign up for newsletter");
 
         // TODO create logic for mutation, also extend graphql definition
 
-        return new MutationResponse();
+        return signUpMutation.createNewRecipient(email, name);
     }
 
 }

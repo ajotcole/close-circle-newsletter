@@ -1,6 +1,6 @@
-package com.ajotcole.closecirclenewsletter.logic;
+package com.ajotcole.closecirclenewsletter.repository;
 
-import com.ajotcole.closecirclenewsletter.types.Mail;
+import com.ajotcole.closecirclenewsletter.model.Mail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;

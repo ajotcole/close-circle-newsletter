@@ -1,4 +1,4 @@
-package com.ajotcole.closecirclenewsletter.types;
+package com.ajotcole.closecirclenewsletter.model;
 
 public class Author {
 
