@@ -1,13 +1,19 @@
 package com.ajotcole.closecirclenewsletter;
 
+import com.ajotcole.closecirclenewsletter.controller.MainController;
+import com.ajotcole.closecirclenewsletter.model.Book;
+import com.ajotcole.closecirclenewsletter.model.MutationResponse;
+import com.ajotcole.closecirclenewsletter.repository.BookRepository;
+import com.ajotcole.closecirclenewsletter.repository.ListMailRecipientsQuery;
+import com.ajotcole.closecirclenewsletter.repository.SendMailMutation;
+import com.ajotcole.closecirclenewsletter.repository.SignUpMutation;
 import net.minidev.json.JSONObject;
-import org.json.JSONException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.graphql.GraphQlTest;
+import org.springframework.context.annotation.Import;
+import org.springframework.graphql.test.tester.GraphQlTester;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import static org.hamcrest.Matchers.notNullValue;
@@ -17,74 +23,50 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
-@AutoConfigureMockMvc
+@Import({BookRepository.class, SendMailMutation.class, SignUpMutation.class, ListMailRecipientsQuery.class})
+@GraphQlTest(MainController.class)
 public class SendMailMutationIT {
 
-    private final MockMvc mockMvc;
-
     @Autowired
-    public SendMailMutationIT(MockMvc mockMvc) {
-        this.mockMvc = mockMvc;
-    }
+    GraphQlTester graphQlTester;
 
     @Test
     public void firstSampleTest() throws Exception {
-        String query = "query allBooks() {" +
-                " allBooks {" +
-                "  id" +
-                "  title" +
-                " }" +
-                "}";
-        JSONObject variables = new JSONObject();
+        // language=GraphQL
+        String query = """
+                query {
+                    allBooks {
+                        id
+                        title
+                    }
+                }
+                """;
 
-        MvcResult mvcResult = mockMvc.perform(post("/graphql")
-                        .content(generateRequest(query, variables))
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(request().asyncStarted())
-                .andExpect(request().asyncResult(notNullValue()))
-                .andReturn();
-
-        mockMvc.perform(asyncDispatch(mvcResult))
-                .andDo(print())
-                .andExpect(status().isOk());
+            graphQlTester.document(query)
+                    .execute()
+                    .path("allBooks")
+                    .entityList(Book.class)
+                    .hasSize(2);
     }
 
     @Test
     public void sendMailSuccessfully() throws Exception {
-        String query = "mutation SendMail {\n" +
-                "  sendMail(mail: {\n" +
-                "    recipients: [\n" +
-                "      {\n" +
-                "        name: \"testName\"\n" +
-                "        email: \"test@mail.com\"\n" +
-                "      }\n" +
-                "    ]\n" +
-                "    subject: \"testSubject\"\n" +
-                "    message: \"test message\"\n" +
-                "  }\n" +
-                "  )\n" +
-                "}";
-        JSONObject variables = new JSONObject();
+        // language=GraphQL
+        String query = """
+                query sendMail {
+                    sendMail(mail: {
+                        recipients: [
+                            name: "testName"
+                            email: "test@mail.com"
+                        ]
+                        subject: "testSubject"
+                        message: "test message"
+                    })
+                }""";
 
-        MvcResult mvcResult = mockMvc.perform(post("/graphql")
-                        .content(generateRequest(query, variables))
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(request().asyncStarted())
-                .andExpect(request().asyncResult(notNullValue()))
-                .andReturn();
-
-        mockMvc.perform(asyncDispatch(mvcResult))
-                .andDo(print())
-                .andExpect(status().isOk());
-    }
-
-    private String generateRequest(String query, JSONObject variables) throws JSONException {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("query", query);
-        if (variables != null) {
-            jsonObject.put("variables", variables);
-        }
-        return jsonObject.toString();
+        graphQlTester.document(query)
+                .execute()
+                .path("sendMail")
+                .entity(MutationResponse.class);
     }
 }
