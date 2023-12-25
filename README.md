@@ -1,5 +1,12 @@
 # Close Circle Newsletter
 
+![image](assets/CloseCircleNewsletterVersion1.jpg)
+
+### Base Info
+Language: Java\
+Version:  21\
+Frameworks: Spring
+
 ### Intro
 This is a free time project of mine, with the intention of extending my Java 
 skill set. I wanted to create a newsletter, that is intended to be read by my
@@ -27,3 +34,12 @@ CI definition will try to reflect that, and take work of my back.
 - [ ] Create GitHub CI Definition
 - [ ] Deploy to server
 - [ ] Final tests
+
+### Installing the project
+
+Use `mvn clean install` to install the project.
+
+### Commands for running the project locally
+
+- Running the integration tests locally: `mvn integration-test`
+- Starting the project locally: `mvn spring-boot:run`

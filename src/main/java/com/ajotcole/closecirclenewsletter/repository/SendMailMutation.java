@@ -1,6 +1,7 @@
 package com.ajotcole.closecirclenewsletter.repository;
 
 import com.ajotcole.closecirclenewsletter.model.Mail;
+import com.ajotcole.closecirclenewsletter.model.MutationResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -10,7 +11,7 @@ public class SendMailMutation {
 
     Logger logger = LoggerFactory.getLogger(SendMailMutation.class);
 
-    public Boolean sendMail(Mail mail) {
+    public MutationResponse sendMail(Mail mail) {
 
         logger.info(String.valueOf(mail));
 
@@ -20,7 +21,7 @@ public class SendMailMutation {
 
         // send mail and add history row in db
 
-        return true;
+        return new MutationResponse.Builder().setMessage("Test").setStatusCode(200).build();
     }
 
 }

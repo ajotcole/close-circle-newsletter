@@ -59,10 +59,7 @@ public class MainController {
     public MutationResponse sendMail(@Argument Mail mail) {
         logger.info("Starting send mail mutation");
 
-        //return sendMailMutation.sendMail(mail);
-
-        return new MutationResponse.Builder().setMessage("Test").setStatusCode(200).build();
-    
+        return sendMailMutation.sendMail(mail);
     }
 
     @MutationMapping
