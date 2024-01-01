@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+## Custom conditions ##
+local/mysql-data

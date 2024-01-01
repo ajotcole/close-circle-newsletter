@@ -1,12 +1,24 @@
 package com.ajotcole.closecirclenewsletter.model;
 
-public class MailReceipient {
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
+@Entity
+public class MailReceipient {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String email;
 
     public MailReceipient() {
         super();
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
