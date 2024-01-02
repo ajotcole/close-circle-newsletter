@@ -23,6 +23,8 @@ CI definition will try to reflect that, and take work of my back.
 
 - [x] Add definition for Mail, MailRecipient and MailSendingMutation to GraphQL
 - [x] Create basic working Integration Testing setup
+- [ ] Create Test Container setup for mocking Database in Integration Tests
+- [ ] Create Terraform Setup
 - [ ] Create tests for MailSendingMutation
 - [ ] Create test for NewsletterSignUpMutation
 - [ ] Connect to Strapi and retrieve Mail Templates (Authenticated Endpoint)
