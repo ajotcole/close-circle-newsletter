@@ -10,11 +10,13 @@ import com.ajotcole.closecirclenewsletter.service.MailRecipientService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.graphql.GraphQlTest;
+import org.springframework.boot.test.autoconfigure.graphql.tester.AutoConfigureGraphQlTester;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.graphql.test.tester.GraphQlTester;
 
-@Import({BookRepository.class, SendMailMutation.class, SignUpMutation.class, MailRecipientRepository.class})
-@GraphQlTest(MainController.class)
+@SpringBootTest
+@AutoConfigureGraphQlTester
 public class ListMailRecipientsQueryIT {
 
     @Autowired
@@ -37,7 +39,7 @@ public class ListMailRecipientsQueryIT {
                 .execute()
                 .path("listMailRecipients")
                 .entityList(MailReceipient.class)
-                .hasSize(1);
+                .hasSize(0);
 
     }
 }

@@ -1,5 +1,6 @@
 package com.ajotcole.closecirclenewsletter.controller;
 
+import com.ajotcole.closecirclenewsletter.repository.MailRecipientRepository;
 import com.ajotcole.closecirclenewsletter.repository.SignUpMutation;
 import com.ajotcole.closecirclenewsletter.model.Book;
 import com.ajotcole.closecirclenewsletter.model.Mail;
@@ -28,8 +29,11 @@ public class MainController {
     private SendMailMutation sendMailMutation;
     @Autowired
     private SignUpMutation signUpMutation;
+    private final MailRecipientRepository mailRecipientRepository;
     @Autowired
-    private MailRecipientService mailRecipientService;
+    public MainController(MailRecipientRepository mailRecipientRepository){
+        this.mailRecipientRepository = mailRecipientRepository;
+    }
 
     Logger logger = LoggerFactory.getLogger(MainController.class);
 
@@ -52,7 +56,7 @@ public class MainController {
 
     @QueryMapping
     public List<MailReceipient> listMailRecipients() {
-        return mailRecipientService.getAllMailRecipients();
+        return this.mailRecipientRepository.findAll();
     }
 
     @MutationMapping

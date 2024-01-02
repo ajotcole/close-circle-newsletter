@@ -12,7 +12,6 @@ public class MailRecipientService {
 
     private final MailRecipientRepository mailRecipientRepository;
 
-    @Autowired
     public MailRecipientService(MailRecipientRepository mailRecipientRepository) {
         this.mailRecipientRepository = mailRecipientRepository;
     }
